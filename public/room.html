@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SyncFlix — Room</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="topbar">
+    <div class="left">
+      <span id="roomLabel">Room</span>
+      <button id="copyLink" class="small-btn">Copy Link</button>
+    </div>
+    <div class="right">
+      <input id="nameInput" placeholder="Your name" />
+      <button id="joinRoomBtn" class="btn small">Join</button>
+      <button id="leaveRoomBtn" class="btn small danger">Leave</button>
+    </div>
+  </div>
+
+  <main class="layout">
+    <section class="video-pane">
+      <div class="video-placeholder">
+        <video id="videoBox" controls autoplay muted></video>
+      </div>
+
+      <div class="media-controls">
+        <button id="playBtn">Play</button>
+        <button id="pauseBtn">Pause</button>
+        <button id="seekBack">-10s</button>
+        <button id="seekFwd">+10s</button>
+      </div>
+
+      <div class="reactions" id="reactions"></div>
+    </section>
+
+    <aside class="chat-pane">
+      <div class="users">
+        <strong>Participants</strong>
+        <ul id="userList"></ul>
+      </div>
+
+      <div class="chat-container">
+        <div class="chat-box" id="chatBox" aria-live="polite"></div>
+        <div id="typingArea" class="typing-display" aria-hidden="true"></div>
+        <div class="chat-controls">
+          <input id="chatInput" placeholder="Type a message" autocomplete="off" />
+          <button id="sendChat" class="btn">Send</button>
+          <div class="emoji-row">
+            <button class="emoji" data-emoji="❤️">❤️</button>
+            <button class="emoji" data-emoji="😂">😂</button>
+            <button class="emoji" data-emoji="😮">😮</button>
+            <button class="emoji" data-emoji="🔥">🔥</button>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <script>
+    const ROOM_ID = location.pathname.split('/').pop();
+    document.getElementById('roomLabel').textContent = 'Room: ' + ROOM_ID;
+  </script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/client.js"></script>
+</body>
+</html>
